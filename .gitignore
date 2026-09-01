@@ -1,0 +1,13 @@
+# Terraform generated local files
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Java compiled outputs
+*.class
+target/
+build/
+
+# OS files
+.DS_Store
