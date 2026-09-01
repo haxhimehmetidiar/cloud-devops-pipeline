@@ -63,3 +63,23 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# 4. AWS Elastic Container Registry (ECR)
+resource "aws_ecr_repository" "app_repo" {
+  name                 = "cloud-devops-app"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = {
+    Name        = "cloud-devops-app-ecr"
+    Environment = "production"
+  }
+}
+
+output "ecr_repository_url" {
+  description = "URL of the created ECR repository"
+  value       = aws_ecr_repository.app_repo.repository_url
+}
