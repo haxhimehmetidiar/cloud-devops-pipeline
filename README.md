@@ -1,22 +1,23 @@
 # Cloud DevOps Pipeline
 
-![CI/CD Pipeline](https://img.shields.io/github/actions/workflow/status/haxhimehmetidiar/cloud-devops-pipeline/ci-cd.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white)
-![Java](https://img.shields.io/badge/Java-17-007396?style=for-the-badge&logo=openjdk&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Multi--stage-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-AWS-844FBA?style=for-the-badge&logo=terraform&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Docker](https://img.shields.io/badge/Docker-Multi--stage-blue)
+![Terraform](https://img.shields.io/badge/Terraform-AWS-purple)
+![Registry](https://img.shields.io/badge/Registry-Docker%20Hub-0db7ed)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-An end-to-end cloud-native DevOps pipeline demonstrating automated continuous integration, infrastructure-as-code provisioning, multi-stage containerization, and security compliance.
+An end-to-end cloud-native DevOps pipeline demonstrating automated continuous integration, infrastructure-as-code provisioning, multi-stage containerization, and deployment to Docker Hub.
 
 ---
 
 ## 🛠️ Tech Stack & Architecture
 
-- **Language:** Java 17 (Lightweight HTTP REST Microservice)
-- **Containerization:** Docker (Multi-stage build optimized for minimal image size)
-- **Infrastructure as Code:** Terraform (AWS VPC, Public Subnets, Security Groups)
-- **CI/CD Automation:** GitHub Actions (Automated testing, formatting checks, & container builds)
-- **Target Platform:** Cloud-Native / AWS Architecture
+* **Language:** Java 17 (Lightweight HTTP REST Microservice)
+* **Containerization:** Docker (Multi-stage build optimized for minimal image size)
+* **Infrastructure as Code:** Terraform (AWS VPC, Public Subnets, Security Groups)
+* **CI/CD Automation:** GitHub Actions (Automated testing, formatting checks, & container builds)
+* **Container Registry:** Docker Hub (Secured via Personal Access Tokens)
 
 ---
 
@@ -36,6 +37,3 @@ cloud-devops-pipeline/
 ├── Dockerfile                 # Multi-stage Docker build config
 ├── .gitignore                 # Tracked file exclusion rules
 └── README.md                  # Project documentation
-
-
-
