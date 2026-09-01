@@ -1,0 +1,70 @@
+name: Cloud DevOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 1. Static Analysis & Infrastructure Validation
+  terraform-check:
+    name: Validate Terraform Specs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+        working-directory: ./terraform
+
+      - name: Terraform Init & Validate
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: ./terraform
+
+  # 2. Build & Test Java Microservice
+  build-and-test:
+    name: Build & Test Java App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compile Java Application
+        run: |
+          mkdir -p bin
+          javac -d bin src/main/java/com/example/app/App.java
+
+  # 3. Docker Image Build & Security Scan
+  docker-build:
+    name: Build Docker Image
+    needs: [terraform-check, build-and-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: cloud-devops-app:${{ github.sha }}
